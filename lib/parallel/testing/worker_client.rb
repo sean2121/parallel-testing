@@ -4,16 +4,17 @@ require 'drb'
 module Parallel
   module Testing
     class WorkerClient
-      attr_accessor :path, :spec_runner, :iterator, :args
+      attr_accessor :path, :spec_runner, :iterator, :args , :number
 
-      def initialize(args)
+      def initialize(args, number)
         @args = args
+        @number = number
         after_fork_do
         start_client
       end
 
       def after_fork_do
-        Parallel::Testing.configuration.after_fork.call(self)
+        Parallel::Testing.configuration.after_fork_transaction.call(self)
       end
 
       def start_client

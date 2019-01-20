@@ -23,9 +23,8 @@ module Parallel
           files_to_run.each { |r| queue.push(r) }
           queue.push(nil)
           pids = []
-          binding.pry
           Parallel::Testing.configuration.number_of_cores.times do
-            pids << fork { WorkerClient.new(args) }
+            pids << fork { WorkerClient.new(args, pids.size + 1) }
           end
           Process.waitall
         end
@@ -38,7 +37,6 @@ module Parallel
           end
         end
       end
-
 
       def configure_rspec(args)
         options = ::RSpec::Core::ConfigurationOptions.new(args)
