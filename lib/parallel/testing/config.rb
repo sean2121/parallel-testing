@@ -1,4 +1,5 @@
 require 'etc'
+require 'pry'
 
 module Parallel
   module Testing
@@ -7,29 +8,25 @@ module Parallel
         yield(configuration)
       end
 
-      def config
+      def configuration
         @configuration ||= Configuration.new
       end
     end
 
     class Configuration
-      include Singleton
       attr_accessor :number_of_cores
 
       def initialize
         @number_of_cores = Etc.nprocessors || 1
+        @after_fork = Proc.new { |worker| }
       end
 
-      def after_fork_set(&block)
-        if block_given?
-          @after_fork_block = block
-        else
-          lambda {}
-        end
+      def after_fork(&block)
+        @after_fork = block if block_given?
       end
 
-      def after_fork
-        @after_fork_block
+      def after_fork_transaction
+        @after_fork
       end
     end
   end

@@ -8,7 +8,12 @@ module Parallel
 
       def initialize(args)
         @args = args
+        after_fork_do
         start_client
+      end
+
+      def after_fork_do
+        Parallel::Testing.configuration.after_fork.call(self)
       end
 
       def start_client

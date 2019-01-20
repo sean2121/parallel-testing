@@ -23,7 +23,8 @@ module Parallel
           files_to_run.each { |r| queue.push(r) }
           queue.push(nil)
           pids = []
-          Parallel::Testing.config.number_of_cores.times do
+          binding.pry
+          Parallel::Testing.configuration.number_of_cores.times do
             pids << fork { WorkerClient.new(args) }
           end
           Process.waitall
