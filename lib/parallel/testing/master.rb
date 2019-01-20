@@ -18,12 +18,12 @@ module Parallel
 
       def start_service
         begin
-          uri = "druby://localhost:50555"
+          uri = "druby://localhost:50565"
           DRb.start_service(uri, queue)
           files_to_run.each { |r| queue.push(r) }
           queue.push(nil)
           pids = []
-          Config.multi_core_info.times do
+          Parallel::Testing.config.number_of_cores.times do
             pids << fork { WorkerClient.new(args) }
           end
           Process.waitall

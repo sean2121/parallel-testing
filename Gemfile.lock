@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    parallel-testing (0.1.0)
+    parallel-testing (0.1.1)
 
 GEM
   remote: https://rubygems.org/
@@ -32,4 +32,4 @@ DEPENDENCIES
   rspec (~> 3.0)
 
 BUNDLED WITH
-   1.16.5
+   1.16.6

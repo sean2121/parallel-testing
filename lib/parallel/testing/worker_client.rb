@@ -13,7 +13,7 @@ module Parallel
 
       def start_client
         DRb.start_service
-        ​​q = DRbObject.new_with_uri('druby://localhost:50555')
+        ​​q = DRbObject.new_with_uri('druby://localhost:50565')
         loop do
           if recv = ​​q.pop
             @iterator = Iterator.new(recv)
