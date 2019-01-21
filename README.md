@@ -1,6 +1,6 @@
 # Parallel::Testing
 
-parallel-testing gem allows you to run your RSpec files in parallel envorinment. 
+parallel-testing gem allows you to run your RSpec files in parallel envorinment.   
 Each RSpec example cases run independent process. 
 
 ## Installation
